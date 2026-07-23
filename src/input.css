@@ -171,6 +171,30 @@
     .sidebar-backdrop, #sidebarToggle { display: none; }
   }
 
+  /* ---------- Mobile-only overrides (must follow the drawer rules) ---------- */
+  @media (max-width: 767px) {
+    /* Sidebar: full-width panel anchored to the top, slides down.
+       Extra top padding leaves room for the hamburger bar so it sits
+       in the panel header instead of overlapping the nav items. */
+    .sidebar {
+      inset: 0 0 auto 0;
+      width: 100%;
+      max-width: 100%;
+      padding-top: 4.75rem;
+      border-radius: 0 0 1rem 1rem;
+      transform: translateY(-100%);
+      transition: transform .35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.sidebar-open .sidebar { transform: translateY(0); }
+    /* The full nav is visible when open, so drop the collapsed label */
+    body.sidebar-open #mobileActive { display: none; }
+
+    /* Orbs: enlarge so they read on small screens (tiny + blurred = invisible) */
+    .orb--a { width: 66vw; height: 66vw; }
+    .orb--b { width: 58vw; height: 58vw; }
+    .orb--c { width: 62vw; height: 62vw; }
+  }
+
   /* ---------- Filters ---------- */
   .filter {
     @apply px-[22px] py-[9px] rounded-xl font-semibold text-[.9rem] text-muted
