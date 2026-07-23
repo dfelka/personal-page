@@ -263,6 +263,13 @@
   }
   .card-btn svg { @apply h-[18px] w-[18px]; }
 
+  /* ---------- Form fields (contact section) ---------- */
+  .field {
+    @apply w-full rounded-xl border border-line bg-alt px-4 py-2.5 text-sm text-ink
+           outline-none transition-colors placeholder:text-muted
+           focus:border-accent focus:ring-2 focus:ring-accent/30;
+  }
+
   /* ---------- Back to top ---------- */
   .to-top {
     @apply fixed right-6 bottom-6 z-40 grid place-items-center w-[46px] h-[46px]

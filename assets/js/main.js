@@ -287,4 +287,27 @@
       });
     });
   }
+
+  /* ---------- Contact form ---------- */
+  // Static site (no backend): compose the message into the visitor's mail app.
+  const contactForm = $("#contactForm");
+  if (contactForm) {
+    const statusEl = $("#formStatus");
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
+      const data = new FormData(contactForm);
+      const get = (k) => (data.get(k) || "").toString().trim();
+      const subject = get("subject") || "Portfolio enquiry";
+      const body = `From: ${get("name")} <${get("email")}>\n\n${get("message")}`;
+      window.location.href =
+        "mailto:lorem@ipsum.com" +
+        `?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (statusEl) statusEl.textContent = "Opening your email app…";
+      contactForm.reset();
+    });
+  }
 })();

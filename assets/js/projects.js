@@ -16,7 +16,7 @@
      title  – project name (shown on hover)
      tag    – small label under the title
      cat    – must match a filter `id` (other than "all")
-     image  – path to a .jpg in assets/img/projects/
+     image  – path to an image in assets/img/projects/ (e.g. .svg / .jpg)
      repo   – GitHub URL   ("#" = placeholder / hidden intent)
      url    – live site URL ("#" = placeholder)
    ============================================================ */
@@ -33,7 +33,7 @@ window.PROJECTS = [
     title: "Aurora Dashboard",
     tag: "Web App",
     cat: "web",
-    image: "assets/img/projects/aurora.jpg",
+    image: "assets/img/projects/aurora.svg",
     repo: "https://github.com/dfelka/todoapp",
     url: "https://dfelka.github.io/todoapp/",
   },
@@ -41,7 +41,7 @@ window.PROJECTS = [
     title: "Nomad Travel App",
     tag: "Mobile App",
     cat: "app",
-    image: "assets/img/projects/nomad.jpg",
+    image: "assets/img/projects/nomad.svg",
     repo: "#",
     url: "#",
   },
@@ -49,7 +49,7 @@ window.PROJECTS = [
     title: "Bloom Identity",
     tag: "Branding",
     cat: "brand",
-    image: "assets/img/projects/bloom.jpg",
+    image: "assets/img/projects/bloom.svg",
     repo: "#",
     url: "#",
   },
@@ -57,7 +57,7 @@ window.PROJECTS = [
     title: "Ledger Fintech",
     tag: "Web App",
     cat: "web",
-    image: "assets/img/projects/ledger.jpg",
+    image: "assets/img/projects/ledger.svg",
     repo: "#",
     url: "#",
   },
@@ -65,7 +65,7 @@ window.PROJECTS = [
     title: "Pulse Fitness",
     tag: "Mobile App",
     cat: "app",
-    image: "assets/img/projects/pulse.jpg",
+    image: "assets/img/projects/pulse.svg",
     repo: "#",
     url: "#",
   },
@@ -73,7 +73,7 @@ window.PROJECTS = [
     title: "Vertex Studio",
     tag: "Branding",
     cat: "brand",
-    image: "assets/img/projects/vertex.jpg",
+    image: "assets/img/projects/vertex.svg",
     repo: "#",
     url: "#",
   },
