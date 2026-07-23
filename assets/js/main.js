@@ -148,14 +148,13 @@
     .map(
       (p) => `
       <article class="card" data-cat="${p.cat}">
-        <img class="h-full w-full object-cover" src="${p.image}" alt="${p.title}" loading="lazy" />
-        <div class="card-overlay">
-          <h3 class="mb-0.5 text-[1.15rem] text-white">${p.title}</h3>
-          <span class="text-[.85rem] text-white/75">${p.tag}</span>
-        </div>
-        <div class="card-actions">
-          ${actionBtn(p.repo, p.title + " — GitHub repository", icoGithub)}
-          ${actionBtn(p.url, p.title + " — live website", icoLink)}
+        <div class="card-inner">
+          <img class="card-img" src="${p.image}" alt="${p.title}" loading="lazy" />
+          <span class="card-title">${p.title}</span>
+          <div class="card-actions">
+            ${actionBtn(p.repo, p.title + " — GitHub repository", icoGithub)}
+            ${actionBtn(p.url, p.title + " — live website", icoLink)}
+          </div>
         </div>
       </article>`
     )
