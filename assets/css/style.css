@@ -886,8 +886,8 @@ h1, h2, h3, h4 {
 }
 
 .side-ico {
-  height: 18px;
   width: 18px;
+  height: 18px;
   flex: none;
 }
 
@@ -906,8 +906,8 @@ h1, h2, h3, h4 {
 }
 
 .theme-switch__ico {
-  height: 1.5rem;
   width: 1.5rem;
+  height: 1.5rem;
   flex: none;
 }
 
@@ -960,8 +960,8 @@ h1, h2, h3, h4 {
 }
 
 .theme-switch__thumb {
-  height: 1.25rem;
   width: 1.25rem;
+  height: 1.25rem;
   border-radius: 9999px;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
@@ -1191,8 +1191,8 @@ h1, h2, h3, h4 {
 
 .card-btn {
   display: grid;
-  height: 2.5rem;
   width: 2.5rem;
+  height: 2.5rem;
   place-items: center;
   border-radius: 0.75rem;
   border-width: 1px;
@@ -1215,8 +1215,8 @@ h1, h2, h3, h4 {
 }
 
 .card-btn svg {
-  height: 18px;
   width: 18px;
+  height: 18px;
 }
 
 /* ---------- Form fields (contact section) ---------- */
@@ -1272,8 +1272,8 @@ h1, h2, h3, h4 {
   bottom: 1.5rem;
   z-index: 40;
   display: grid;
-  height: 46px;
   width: 46px;
+  height: 46px;
   --tw-translate-y: 0.75rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   place-items: center;
@@ -1459,20 +1459,28 @@ h1, h2, h3, h4 {
   display: none;
 }
 
-.h-10 {
+.size-10 {
+  width: 2.5rem;
   height: 2.5rem;
+}
+
+.size-11 {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.size-4 {
+  width: 1rem;
+  height: 1rem;
+}
+
+.size-5 {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .h-11 {
   height: 2.75rem;
-}
-
-.h-4 {
-  height: 1rem;
-}
-
-.h-5 {
-  height: 1.25rem;
 }
 
 .h-\[18px\] {
@@ -1483,24 +1491,8 @@ h1, h2, h3, h4 {
   min-height: 100vh;
 }
 
-.w-10 {
-  width: 2.5rem;
-}
-
-.w-11 {
-  width: 2.75rem;
-}
-
 .w-2\/3 {
   width: 66.666667%;
-}
-
-.w-4 {
-  width: 1rem;
-}
-
-.w-5 {
-  width: 1.25rem;
 }
 
 .w-\[18px\] {
