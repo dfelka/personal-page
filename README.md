@@ -8,12 +8,11 @@ A fast, single-page developer portfolio built with **Tailwind CSS v3**, semantic
 
 ## Features
 
-- 🎨 **Light/dark theme** with no flash-of-wrong-theme (theme applied before first paint) and OS-preference following
-- 🧭 **Floating sidebar** with scroll-spy active state; collapses to a drawer on tablet/mobile
+- 🎨 **Light/dark theme**  OS-preference following
+- 🧭 **Floating sidebar** collapses to a drawer on tablet/mobile
 - 💻 **Animated "typing code" background** rendered from the site's own source files
 - 🗂️ **Data-driven projects grid** with category filters (edit one file, no build needed)
 - ✉️ **Contact section** with a client-validated form that composes a message via the visitor's mail app
-- ♿ **Accessible**: semantic landmarks, `aria-*` on interactive controls, labelled form fields, reduced-motion support
 - 📦 **Zero runtime dependencies** — Tailwind is the only build-time tool
 
 ## Tech stack
@@ -22,7 +21,7 @@ A fast, single-page developer portfolio built with **Tailwind CSS v3**, semantic
 |-------|--------|
 | Styling | Tailwind CSS v3.4 (CLI build) + a small `@layer components` for reused patterns |
 | Markup | Plain HTML5 |
-| Behavior | Vanilla ES6 JavaScript (single IIFE, no bundler) |
+| Behavior | Vanilla ES6 JavaScript |
 | Artwork | Inline SVG blueprint drawings |
 | Hosting/CI | GitHub Pages via GitHub Actions |
 
@@ -41,7 +40,7 @@ personal-page/
 │  │  ├─ main.js              # all behavior
 │  │  └─ projects.js          # project data (edit this to manage the grid)
 │  ├─ fonts/                  # self-hosted Inter (woff2)
-│  └─ img/projects/           # blueprint SVGs
+│  └─ img/projects/           
 └─ .github/workflows/deploy.yml
 ```
 
