@@ -244,6 +244,13 @@
   /* No hover on touch, so drop the zoom on mobile */
   @media (max-width: 767px) {
     .card:hover .card-img { transform: none; }
+    /* Move the title to the top-right so it clears the bottom action buttons */
+    .card-title {
+      top: 0.875rem;
+      right: 0.875rem;
+      left: auto;
+      bottom: auto;
+    }
   }
 
   /* Always-visible title chip, same translucent styling and height as the buttons */
