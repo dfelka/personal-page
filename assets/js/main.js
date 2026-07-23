@@ -93,19 +93,6 @@
   );
   $$(".reveal").forEach((el) => revealer.observe(el));
 
-  /* ---------- Skill bars ---------- */
-  const skillObs = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        e.target.style.width = e.target.dataset.level + "%";
-        obs.unobserve(e.target);
-      });
-    },
-    { threshold: 0.4 }
-  );
-  $$(".skill-fill").forEach((el) => skillObs.observe(el));
-
   /* ---------- Animated counters ---------- */
   const countObs = new IntersectionObserver(
     (entries, obs) => {
