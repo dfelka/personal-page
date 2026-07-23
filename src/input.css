@@ -1,24 +1,10 @@
-/* ---------- Self-hosted fonts (offline-safe, no CDN) ---------- */
+/* ---------- Self-hosted font (offline-safe, no CDN) ---------- */
 @font-face {
   font-family: "Inter";
   font-style: normal;
   font-weight: 100 900;           /* variable font: covers all weights */
   font-display: swap;
   src: url("../fonts/inter-latin.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("../fonts/poppins-600.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("../fonts/poppins-700.woff2") format("woff2");
 }
 
 @tailwind base;
@@ -31,8 +17,18 @@
    ============================================================ */
 
 @layer base {
-  /* Theme tokens — channels as "R G B" so Tailwind's <alpha-value> works. */
+  /* ---------------------------------------------------------------
+     Colors live here. Channels are "R G B" so Tailwind's
+     <alpha-value> works (e.g. bg-accent/25). Brand colors are the
+     same in both themes; surface tokens flip in .dark.
+     --------------------------------------------------------------- */
   :root {
+    /* Brand palette (theme-independent) */
+    --c-accent: 255 100 100;       /* accent red */
+    --c-accent-dark: 235 72 72;    /* accent hover (darker red) */
+    --c-night: 22 23 27;           /* dark text on accent */
+
+    /* Surface tokens — light theme */
     --c-page: 255 255 255;
     --c-surface: 255 255 255;
     --c-alt: 247 248 250;
@@ -40,8 +36,13 @@
     --c-body: 65 66 71;
     --c-muted: 108 109 115;
     --c-line: 231 232 236;
+
+    /* Backdrop — light theme (white) */
+    --bg-gradient: rgb(255 255 255);
+    --code-base: 88 94 104;   /* typed-code color: gray */
   }
   .dark {
+    /* Surface tokens — dark theme */
     --c-page: 22 23 27;
     --c-surface: 31 32 39;
     --c-alt: 25 26 32;
@@ -49,6 +50,10 @@
     --c-body: 195 196 201;
     --c-muted: 139 140 147;
     --c-line: 44 45 53;
+
+    /* Animated backdrop gradient — dark theme */
+    --bg-gradient: linear-gradient(160deg, rgb(14 15 18) 0%, rgb(27 29 34) 55%, rgb(10 11 13) 100%);
+    --code-base: 208 213 221;  /* typed-code color: toned white */
   }
   html {
     scroll-behavior: smooth;
@@ -62,7 +67,7 @@
     transition: color .3s;
   }
   h1, h2, h3, h4 {
-    @apply font-display text-ink font-bold leading-tight;
+    @apply text-ink font-bold leading-tight;
   }
 }
 
@@ -71,26 +76,46 @@
   #bg {
     @apply pointer-events-none fixed -z-10 overflow-hidden;
     inset: 0;
-    /* light gray gradient in light mode */
-    background: linear-gradient(160deg, #f4f5f7 0%, #e8eaee 55%, #f1f2f5 100%);
+    background: var(--bg-gradient);
   }
-  /* dark black-gray gradient in dark mode */
-  .dark #bg { background: linear-gradient(160deg, #0e0f12 0%, #1b1d22 55%, #0a0b0d 100%); }
 
-  .orb {
-    @apply absolute rounded-full opacity-40;
-    filter: blur(60px);
-    will-change: transform;
+  /* Typing-code backdrop — 3 full-width columns */
+  #codeBg {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    gap: clamp(1rem, 4vw, 4rem);
+    padding: 1.5rem clamp(1rem, 4vw, 3rem);
+    opacity: .5;
+    /* Fade the code out at the top (old code) and bottom (clears the footer) */
+    -webkit-mask: linear-gradient(to bottom, transparent 0%, #000 28%, #000 86%, transparent 100%);
+    mask: linear-gradient(to bottom, transparent 0%, #000 28%, #000 86%, transparent 100%);
   }
-  /* Each orb is anchored in a corner and wanders within its own half,
-     so none drift across the middle where the content sits. */
-  .orb--a { width: 22vw; height: 22vw; left: 2vw;  top: 4vh;    background: #e3d09c; animation: orbA 24s ease-in-out infinite; }
-  .orb--b { width: 18vw; height: 18vw; right: 2vw; top: 24vh;   background: #e3d09c; animation: orbB 28s ease-in-out infinite; }
-  .orb--c { width: 20vw; height: 20vw; left: 6vw;  bottom: 4vh; background: #e3d09c; animation: orbC 32s ease-in-out infinite; }
+  .dark #codeBg { opacity: .5; }
+  .code-col { position: relative; overflow: hidden; }
+  .code-col pre {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 12.5px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: rgb(var(--code-base));
+  }
+  /* Page-wide vignette */
+  #vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 58%, rgba(0, 0, 0, 0.065) 100%);
+  }
 
   /* Dark mode: shadow the content text for legibility over the backdrop */
   .dark #hero, .dark #about, .dark #projects, .dark footer {
-    text-shadow: 0 2px 10px rgba(0, 0, 0, .45);
+    text-shadow: 0 2px 10px rgb(0 0 0 / .45);
   }
 
   /* ---------- Buttons ---------- */
@@ -99,17 +124,23 @@
            border-2 border-transparent transition duration-200 ease-smooth;
   }
   .btn:hover { @apply -translate-y-[3px]; }
-  .btn-primary { @apply bg-accent text-night shadow-[0_12px_24px_-12px_theme(colors.accent.DEFAULT)]; }
+  .btn-primary { @apply bg-accent text-white shadow-[0_12px_24px_-12px_rgb(var(--c-accent))]; }
   .btn-primary:hover { @apply bg-accent-dark; }
   .btn-ghost { @apply text-ink border-ink/30; }
   .btn-ghost:hover { @apply bg-ink text-page border-ink; }
   .btn-full { @apply w-full text-center; }
 
+  /* ---------- Content panel (surface card) ---------- */
+  /* bg-surface = white in light mode, dark surface in dark mode */
+  .panel {
+    @apply w-full rounded-[14px] border border-line bg-surface p-8 shadow-soft sm:p-10;
+  }
+
   /* ---------- Section heading underline ---------- */
   .head-underline { @apply relative inline-block pb-4; }
   .head-underline::after {
     content: "";
-    @apply absolute left-1/2 bottom-0 -translate-x-1/2 w-[60px] h-[3px] bg-accent rounded;
+    @apply absolute left-0 bottom-0 w-[60px] h-[3px] bg-accent rounded;
   }
 
   /* ---------- Floating sidebar ---------- */
@@ -128,7 +159,7 @@
   }
   /* Active item: accent background with dark text/icon in both themes */
   .side-link.active,
-  .side-link.active:hover { @apply bg-accent text-night font-semibold; }
+  .side-link.active:hover { @apply bg-accent text-white font-semibold; }
   /* Brighten inactive items in dark mode for readability */
   .dark .side-link:not(.active) { @apply text-body; }
   /* ...and go full white on hover so it's clearly noticeable */
@@ -155,7 +186,8 @@
 
   /* ---------- Drawer backdrop ---------- */
   .sidebar-backdrop {
-    @apply fixed inset-0 z-40 bg-black/50 opacity-0 transition-opacity duration-300;
+    @apply fixed inset-0 z-40 opacity-0 transition-opacity duration-300;
+    background-color: rgb(0 0 0 / .5);
   }
 
   /* Below xl the sidebar becomes a slide-in drawer */
@@ -188,11 +220,6 @@
     body.sidebar-open .sidebar { transform: translateY(0); }
     /* The full nav is visible when open, so drop the collapsed label */
     body.sidebar-open #mobileActive { display: none; }
-
-    /* Orbs: enlarge so they read on small screens (tiny + blurred = invisible) */
-    .orb--a { width: 66vw; height: 66vw; }
-    .orb--b { width: 58vw; height: 58vw; }
-    .orb--c { width: 62vw; height: 62vw; }
   }
 
   /* ---------- Filters ---------- */
@@ -201,7 +228,7 @@
            bg-alt border border-line transition-colors;
   }
   .filter:hover { @apply text-ink; }
-  .filter.active { @apply bg-accent text-night border-accent; }
+  .filter.active { @apply bg-accent text-white border-accent; }
 
   /* ---------- Project cards ---------- */
   .card {
@@ -222,22 +249,24 @@
   /* Always-visible title chip, same translucent styling and height as the buttons */
   .card-title {
     @apply absolute bottom-3.5 left-3.5 z-20 inline-flex h-12 items-center rounded-full
-           bg-black/45 px-5 text-sm font-semibold text-white backdrop-blur-sm;
+           px-5 text-sm font-semibold text-white backdrop-blur-sm;
+    background-color: rgb(0 0 0 / .45);
   }
 
   /* Action buttons — always visible, bottom-right. */
   .card-actions { @apply absolute bottom-3.5 right-3.5 z-20 flex gap-2.5; }
   .card-btn {
     @apply grid h-12 w-12 place-items-center rounded-full text-white
-           bg-black/45 backdrop-blur-sm transition duration-200
-           hover:-translate-y-0.5 hover:bg-accent hover:text-night;
+           backdrop-blur-sm transition duration-200
+           hover:-translate-y-0.5 hover:bg-accent hover:text-white;
+    background-color: rgb(0 0 0 / .45);
   }
   .card-btn svg { @apply h-[22px] w-[22px]; }
 
   /* ---------- Back to top ---------- */
   .to-top {
     @apply fixed right-6 bottom-6 z-40 grid place-items-center w-[46px] h-[46px]
-           rounded-xl text-night bg-accent shadow-soft invisible opacity-0 translate-y-3
+           rounded-xl text-white bg-accent shadow-soft invisible opacity-0 translate-y-3
            transition duration-300 hover:bg-accent-dark;
   }
   .to-top.show { @apply visible opacity-100 translate-y-0; }
@@ -249,23 +278,6 @@
                 transform .7s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .reveal.in { @apply opacity-100 translate-y-0; }
-}
-
-/* ---------- Orb drift keyframes (wander within each half) ---------- */
-@keyframes orbA { /* top-left, stays left of center */
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%      { transform: translate(12vw, 20vh) scale(1.12); }
-  66%      { transform: translate(4vw, 38vh) scale(0.9); }
-}
-@keyframes orbB { /* right side, stays right of center */
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%      { transform: translate(-13vw, -16vh) scale(1.15); }
-  66%      { transform: translate(-5vw, 20vh) scale(0.92); }
-}
-@keyframes orbC { /* bottom-left, stays left of center */
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%      { transform: translate(13vw, -18vh) scale(1.1); }
-  66%      { transform: translate(3vw, -6vh) scale(0.95); }
 }
 
 @media (prefers-reduced-motion: reduce) {

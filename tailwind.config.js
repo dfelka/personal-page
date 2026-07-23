@@ -6,16 +6,15 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      // All colors are CSS variables defined in src/input.css.
       colors: {
-        // Accent stays constant across themes (light tan)
+        // Brand palette — constant across themes
         accent: {
-          DEFAULT: "#e3d09c",
-          dark: "#d4bd7e",
+          DEFAULT: withVar("--c-accent"),
+          dark: withVar("--c-accent-dark"),
         },
-        // Fixed dark ink — for text ON the accent, and the footer.
-        // Does NOT flip with the theme.
-        night: "#16171b",
-        // Theme-aware tokens, driven by CSS variables (see src/input.css).
+        night: withVar("--c-night"),      // dark text on accent
+        // Surface tokens — flip between light/dark
         page: withVar("--c-page"),        // page background
         surface: withVar("--c-surface"),  // cards / elevated surfaces
         alt: withVar("--c-alt"),          // alt section background
@@ -29,15 +28,12 @@ module.exports = {
           "Inter", "system-ui", "-apple-system", "Segoe UI", "Roboto",
           "Helvetica", "Arial", "sans-serif",
         ],
-        display: [
-          "Poppins", "system-ui", "-apple-system", "Segoe UI", "sans-serif",
-        ],
       },
       maxWidth: {
         site: "1140px",
       },
       boxShadow: {
-        soft: "0 18px 40px -20px rgba(20, 22, 30, 0.28)",
+        soft: "0 18px 40px -20px rgb(20 22 30 / 0.28)",
       },
       transitionTimingFunction: {
         smooth: "cubic-bezier(0.22, 1, 0.36, 1)",

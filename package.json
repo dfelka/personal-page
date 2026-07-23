@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --watch",
-    "build": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --minify"
+    "build": "tailwindcss -i ./src/input.css -o ./assets/css/style.css",
+    "build:min": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --minify"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"

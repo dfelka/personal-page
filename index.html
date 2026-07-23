@@ -17,18 +17,16 @@
   </script>
 
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin.woff2" crossorigin />
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-700.woff2" crossorigin />
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👋</text></svg>" />
 </head>
 <body>
 
-  <!-- ===== Animated page background (2 layers) ===== -->
+  <!-- ===== Animated page background (typing code, 3 columns) ===== -->
   <div id="bg" aria-hidden="true">
-    <span class="orb orb--a"></span>
-    <span class="orb orb--b"></span>
-    <span class="orb orb--c"></span>
+    <div id="codeBg"></div>
   </div>
+  <div id="vignette" aria-hidden="true"></div>
 
   <!-- ===== Mobile menu bar (tablet / mobile) ===== -->
   <div id="mobileBar" class="fixed left-4 top-4 z-[60] flex items-center gap-2.5 xl:hidden">
@@ -76,28 +74,26 @@
   </aside>
 
   <!-- ===== Hero ===== -->
-  <section id="hero" class="relative flex min-h-screen items-center overflow-hidden text-center xl:pl-[248px]">
-    <div class="relative z-[2] mx-auto max-w-[780px] px-5">
-      <p class="mb-3 font-semibold uppercase tracking-[2px] text-accent" style="font-size:clamp(1.2rem,3vw,1.7rem); text-shadow:1px 1px 0 rgba(0,0,0,.55)">Hi there, I'm</p>
-      <h1 class="mb-8 text-ink tracking-tight" style="font-size:clamp(2.6rem,7vw,4.6rem)">Alex Rivera</h1>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
+  <section id="hero" class="relative flex min-h-screen items-center overflow-hidden text-left xl:pl-[248px]">
+    <div class="relative z-[2] mx-auto w-full max-w-site px-5">
+      <div class="panel">
+        <h1 class="mb-0 text-ink tracking-tight" style="font-size:clamp(2.6rem,7vw,4.6rem)">Daniel F.</h1>
+        <p class="mb-0 font-semibold uppercase tracking-[2px] text-accent" style="font-size:clamp(1.2rem,1vw,1.7rem)">Software Developer</p>
+        <div class="mt-8 flex flex-wrap justify-start gap-4">
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+        </div>
       </div>
     </div>
-    <a href="#about" id="scrollDown" class="absolute bottom-6 left-1/2 z-[2] grid h-11 w-11 -translate-x-1/2 place-items-center rounded-xl bg-accent text-xl text-night shadow-soft transition duration-300 hover:bg-accent-dark" aria-label="Scroll down">↓</a>
+    <a href="#about" id="scrollDown" class="absolute bottom-6 left-1/2 z-[2] grid h-11 w-11 -translate-x-1/2 place-items-center rounded-xl bg-accent text-xl text-white shadow-soft transition duration-300 hover:bg-accent-dark" aria-label="Scroll down">↓</a>
   </section>
 
   <main>
     <!-- ===== About ===== -->
-    <section id="about" class="py-[100px] xl:pl-[248px]">
+    <section id="about" class="relative flex min-h-screen items-center py-[80px] xl:pl-[248px]">
       <div class="mx-auto w-full max-w-site px-5">
-        <div class="reveal mx-auto mb-[60px] max-w-[620px] text-center">
+        <div class="reveal panel text-left">
           <h2 class="head-underline" style="font-size:clamp(2rem,5vw,2.6rem)">About Me</h2>
-          <!-- <p class="mt-3 text-muted">A short introduction to who I am and what I do.</p> -->
-        </div>
-
-        <div class="reveal mx-auto max-w-[720px] rounded-[14px] border border-line bg-alt p-8 text-center shadow-soft sm:p-10">
-          <h3 class="text-[1.0rem]">Product Designer &amp; Front-End Developer</h3>
+          <h3 class="mt-6 text-[1.0rem]">Product Designer &amp; Front-End Developer</h3>
           <p class="mb-0 mt-3 text-muted dark:text-body">
             I craft clean, accessible digital experiences that people love to use. With
             8+ years across design and code, I bridge the gap between beautiful
@@ -108,18 +104,18 @@
     </section>
 
     <!-- ===== Projects ===== -->
-    <section id="projects" class="py-[100px] xl:pl-[248px]">
+    <section id="projects" class="relative flex min-h-screen items-center py-[80px] xl:pl-[248px]">
       <div class="mx-auto w-full max-w-site px-5">
-        <div class="reveal mx-auto mb-[60px] max-w-[620px] text-center">
+        <div class="reveal panel text-left">
           <h2 class="head-underline" style="font-size:clamp(2rem,5vw,2.6rem)">Projects</h2>
           <p class="mt-3 text-muted dark:text-body">A selection of recent work across product, brand, and web.</p>
-        </div>
 
-        <!-- Filter buttons are generated from PROJECT_FILTERS in projects.js -->
-        <div class="reveal mb-10 flex flex-wrap justify-center gap-2.5" id="filters"></div>
+          <!-- Filter buttons are generated from PROJECT_FILTERS in projects.js -->
+          <div class="mb-10 mt-8 flex flex-wrap justify-center gap-2.5" id="filters"></div>
 
-        <div class="grid gap-[26px] sm:grid-cols-2 lg:grid-cols-3" id="projectsGrid">
-          <!-- items injected by JS -->
+          <div class="grid gap-[26px] sm:grid-cols-2 lg:grid-cols-3" id="projectsGrid">
+            <!-- items injected by JS -->
+          </div>
         </div>
       </div>
     </section>
@@ -127,7 +123,7 @@
   </main>
 
   <!-- ===== Footer ===== -->
-  <footer class="border-t border-line/60 py-[30px] text-muted">
+  <footer class="py-[30px] text-muted">
     <div class="mx-auto w-full max-w-site px-5 text-center">
       <p class="m-0 text-[.9rem]">&copy; <span id="year"></span> Alex Rivera. All rights reserved.</p>
     </div>
