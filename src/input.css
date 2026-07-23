@@ -132,32 +132,31 @@
   .filter:hover { @apply text-ink; }
   .filter.active { @apply bg-accent text-night border-accent; }
 
-  /* ---------- Portfolio cards ---------- */
+  /* ---------- Project cards ---------- */
   .card {
-    @apply relative overflow-hidden rounded-[14px] shadow-soft cursor-pointer
+    @apply relative overflow-hidden rounded-[14px] shadow-soft
            aspect-[4/3] transition-transform duration-300 ease-smooth;
   }
   .card:hover { @apply -translate-y-1.5; }
   .card.hide { @apply hidden; }
   .card-overlay {
-    @apply absolute inset-0 flex flex-col justify-end p-[22px] opacity-0 translate-y-3
+    @apply absolute inset-0 flex flex-col justify-end p-[22px] pr-[92px] opacity-0 translate-y-3
            transition duration-300;
     background: linear-gradient(to top, rgba(20, 22, 30, .88), transparent 70%);
   }
   .card:hover .card-overlay { @apply opacity-100 translate-y-0; }
 
+  /* Action buttons — always visible, fixed at the bottom-right so they
+     don't shift or fade when the card is hovered. */
+  .card-actions { @apply absolute bottom-3 right-3 z-20 flex gap-2; }
+  .card-btn {
+    @apply grid h-9 w-9 place-items-center rounded-full text-white
+           bg-black/45 backdrop-blur-sm transition duration-200
+           hover:-translate-y-0.5 hover:bg-accent hover:text-night;
+  }
+
   /* ---------- Typed cursor ---------- */
   .typed { @apply font-semibold text-white pr-[3px] border-r-2 border-accent; }
-
-  /* ---------- Form validation ---------- */
-  .field-input {
-    @apply w-full rounded-[10px] border border-line bg-alt px-4 py-3.5 text-body
-           transition-colors resize-y focus:outline-none focus:border-accent focus:bg-surface;
-  }
-  .field-input::placeholder { @apply text-muted; }
-  .field-input.invalid { @apply border-red-500; }
-  .form-status.ok { @apply text-emerald-600; }
-  .form-status.err { @apply text-red-500; }
 
   /* ---------- Back to top ---------- */
   .to-top {
