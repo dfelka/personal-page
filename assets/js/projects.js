@@ -75,8 +75,8 @@ window.PROJECTS = [
     tag: "Web App",
     cat: "webapp",
     image: "assets/img/projects/calculator.jpg",
-    repo: "https://github.com/dfelka/battleship",
-    url: "https://dfelka.github.io/battleship/",
+    repo: "https://github.com/dfelka/calculator",
+    url: "https://dfelka.github.io/calculator/",
   },
   {
     title: "Rock-Paper-Scissors game",
@@ -84,7 +84,7 @@ window.PROJECTS = [
     cat: "webapp",
     image: "assets/img/projects/rock-paper-scissors.jpg",
     repo: "https://github.com/dfelka/rock-paper-scissors",
-    url: "https://dfelka.github.io/battleship/",
+    url: "https://dfelka.github.io/rock-paper-scissors/",
   },
   {
     title: "TicTacToe game",
@@ -93,6 +93,13 @@ window.PROJECTS = [
     image: "assets/img/projects/tictactoe.jpg",
     repo: "https://github.com/dfelka/tic-tac-toe",
     url: "https://dfelka.github.io/tic-tac-toe/",
+  },
+  {
+    title: "Knight Travails",
+    tag: "JavaScript",
+    cat: "js",
+    image: "assets/img/projects/knight-travails.jpg",
+    repo: "https://github.com/dfelka/knight-travails",
   },
   {
     title: "Binary Tree",
