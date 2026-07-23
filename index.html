@@ -23,6 +23,13 @@
 </head>
 <body>
 
+  <!-- ===== Animated page background (2 layers) ===== -->
+  <div id="bg" aria-hidden="true">
+    <span class="orb orb--a"></span>
+    <span class="orb orb--b"></span>
+    <span class="orb orb--c"></span>
+  </div>
+
   <!-- ===== Floating open button (tablet / mobile) ===== -->
   <button id="sidebarToggle" class="fixed left-4 top-4 z-[60] grid h-11 w-11 place-items-center rounded-xl border border-line bg-surface text-ink shadow-soft transition hover:bg-alt xl:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">
     <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -66,15 +73,11 @@
   </aside>
 
   <!-- ===== Hero ===== -->
-  <section id="hero" class="relative flex min-h-screen items-center overflow-hidden text-center text-white xl:pl-[248px]"
-    style="background: radial-gradient(1200px 600px at 70% -10%, rgba(227,208,156,.28), transparent 60%), linear-gradient(135deg,#1b1d29 0%,#2a2140 45%,#3a2233 100%);">
-    <div class="pointer-events-none absolute inset-0 opacity-60"
-      style="background: radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.35), transparent), radial-gradient(2px 2px at 80% 60%, rgba(255,255,255,.25), transparent), radial-gradient(1.5px 1.5px at 50% 80%, rgba(255,255,255,.3), transparent), radial-gradient(2px 2px at 65% 25%, rgba(255,255,255,.2), transparent);"></div>
-
+  <section id="hero" class="relative flex min-h-screen items-center overflow-hidden text-center xl:pl-[248px]">
     <div class="relative z-[2] mx-auto max-w-[780px] px-5">
       <p class="mb-2.5 text-[.85rem] font-semibold uppercase tracking-[2px] text-accent">Hi there, I'm</p>
-      <h1 class="mb-2 text-white tracking-tight" style="font-size:clamp(2.6rem,7vw,4.6rem)">Alex Rivera</h1>
-      <p class="mx-0 mb-8 min-h-[1.6em] text-white/85" style="font-size:clamp(1.1rem,3vw,1.6rem)">
+      <h1 class="mb-2 text-ink tracking-tight" style="font-size:clamp(2.6rem,7vw,4.6rem)">Alex Rivera</h1>
+      <p class="mx-0 mb-8 min-h-[1.6em] text-body" style="font-size:clamp(1.1rem,3vw,1.6rem)">
         I'm <span class="typed" data-typed='["a Product Designer.","a Front-End Developer.","a Creative Thinker.","a Problem Solver."]'></span>
       </p>
       <div class="flex flex-wrap justify-center gap-4">
@@ -82,7 +85,7 @@
         <a href="https://github.com/dfelka" target="_blank" rel="noopener" class="btn btn-ghost">Get In Touch</a>
       </div>
     </div>
-    <a href="#about" class="absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 animate-bounce2 text-2xl text-white" aria-label="Scroll down">↓</a>
+    <a href="#about" class="absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 animate-bounce2 text-2xl text-muted" aria-label="Scroll down">↓</a>
   </section>
 
   <main>
@@ -158,10 +161,10 @@
   </main>
 
   <!-- ===== Footer ===== -->
-  <footer class="bg-night py-[30px] text-white/70 xl:pl-[248px]">
+  <footer class="border-t border-line/60 py-[30px] text-muted xl:pl-[248px]">
     <div class="mx-auto flex w-full max-w-site flex-wrap items-center justify-between gap-2 px-5 text-center sm:text-left">
       <p class="m-0 text-[.9rem]">&copy; <span id="year"></span> Alex Rivera. All rights reserved.</p>
-      <p class="m-0 text-[.9rem] text-white/45">Built with Tailwind CSS &amp; vanilla JavaScript.</p>
+      <p class="m-0 text-[.9rem] opacity-70">Built with Tailwind CSS &amp; vanilla JavaScript.</p>
     </div>
   </footer>
 

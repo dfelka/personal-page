@@ -53,11 +53,13 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 24px;
+    @apply bg-page;
   }
   body {
-    @apply bg-page font-sans text-body antialiased;
+    /* transparent so the fixed #bg backdrop shows through */
+    @apply bg-transparent font-sans text-body antialiased;
     line-height: 1.65;
-    transition: background-color .3s, color .3s;
+    transition: color .3s;
   }
   h1, h2, h3, h4 {
     @apply font-display text-ink font-bold leading-tight;
@@ -65,6 +67,32 @@
 }
 
 @layer components {
+  /* ---------- Animated page background ---------- */
+  #bg {
+    @apply pointer-events-none fixed -z-10 overflow-hidden;
+    inset: 0;
+    /* light gray gradient in light mode */
+    background: linear-gradient(160deg, #f4f5f7 0%, #e8eaee 55%, #f1f2f5 100%);
+  }
+  /* dark black-gray gradient in dark mode */
+  .dark #bg { background: linear-gradient(160deg, #0e0f12 0%, #1b1d22 55%, #0a0b0d 100%); }
+
+  .orb {
+    @apply absolute rounded-full opacity-40;
+    filter: blur(60px);
+    will-change: transform;
+  }
+  /* Each orb is anchored in a corner and wanders within its own half,
+     so none drift across the middle where the content sits. */
+  .orb--a { width: 22vw; height: 22vw; left: 2vw;  top: 4vh;    background: #e3d09c; animation: orbA 24s ease-in-out infinite; }
+  .orb--b { width: 18vw; height: 18vw; right: 2vw; top: 24vh;   background: #e3d09c; animation: orbB 28s ease-in-out infinite; }
+  .orb--c { width: 20vw; height: 20vw; left: 6vw;  bottom: 4vh; background: #e3d09c; animation: orbC 32s ease-in-out infinite; }
+
+  /* Dark mode: shadow the content text for legibility over the backdrop */
+  .dark #hero, .dark #about, .dark #projects, .dark footer {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, .45);
+  }
+
   /* ---------- Buttons ---------- */
   .btn {
     @apply inline-block rounded-full px-[30px] py-[13px] font-semibold text-[.95rem]
@@ -73,8 +101,8 @@
   .btn:hover { @apply -translate-y-[3px]; }
   .btn-primary { @apply bg-accent text-night shadow-[0_12px_24px_-12px_theme(colors.accent.DEFAULT)]; }
   .btn-primary:hover { @apply bg-accent-dark; }
-  .btn-ghost { @apply text-white border-white/60; }
-  .btn-ghost:hover { @apply bg-white text-night border-white; }
+  .btn-ghost { @apply text-ink border-ink/30; }
+  .btn-ghost:hover { @apply bg-ink text-page border-ink; }
   .btn-full { @apply w-full text-center; }
 
   /* ---------- Section heading underline ---------- */
@@ -175,7 +203,7 @@
   }
 
   /* ---------- Typed cursor ---------- */
-  .typed { @apply font-semibold text-white pr-[3px] border-r-2 border-accent; }
+  .typed { @apply font-semibold text-ink pr-[3px] border-r-2 border-accent; }
 
   /* ---------- Back to top ---------- */
   .to-top {
@@ -192,6 +220,23 @@
                 transform .7s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .reveal.in { @apply opacity-100 translate-y-0; }
+}
+
+/* ---------- Orb drift keyframes (wander within each half) ---------- */
+@keyframes orbA { /* top-left, stays left of center */
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(12vw, 20vh) scale(1.12); }
+  66%      { transform: translate(4vw, 38vh) scale(0.9); }
+}
+@keyframes orbB { /* right side, stays right of center */
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(-13vw, -16vh) scale(1.15); }
+  66%      { transform: translate(-5vw, 20vh) scale(0.92); }
+}
+@keyframes orbC { /* bottom-left, stays left of center */
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(13vw, -18vh) scale(1.1); }
+  66%      { transform: translate(3vw, -6vh) scale(0.95); }
 }
 
 @media (prefers-reduced-motion: reduce) {
