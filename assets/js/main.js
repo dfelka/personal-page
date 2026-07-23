@@ -14,16 +14,23 @@
   // Initial theme is applied by an inline <head> script (no flash).
   const root = document.documentElement;
   const themeToggle = $("#themeToggle");
+  const syncSwitch = () => {
+    if (themeToggle) themeToggle.setAttribute("aria-checked", String(root.classList.contains("dark")));
+  };
+  syncSwitch();
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
       const dark = root.classList.toggle("dark");
       localStorage.setItem("theme", dark ? "dark" : "light");
-      themeToggle.setAttribute("aria-pressed", String(dark));
+      syncSwitch();
     });
   }
   // Follow OS changes only while the user hasn't chosen explicitly.
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-    if (!localStorage.getItem("theme")) root.classList.toggle("dark", e.matches);
+    if (!localStorage.getItem("theme")) {
+      root.classList.toggle("dark", e.matches);
+      syncSwitch();
+    }
   });
 
   /* ---------- Back-to-top ---------- */

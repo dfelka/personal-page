@@ -98,13 +98,30 @@
     @apply flex items-center gap-3 rounded-xl px-3 py-2.5 text-[.92rem] font-medium
            text-muted transition-colors duration-200 hover:bg-alt hover:text-ink;
   }
-  .side-link.active { @apply bg-alt text-ink font-semibold; }
+  /* Active item: accent background with dark text/icon in both themes */
+  .side-link.active,
+  .side-link.active:hover { @apply bg-accent text-night font-semibold; }
+  /* Brighten inactive items in dark mode for readability */
+  .dark .side-link:not(.active) { @apply text-body; }
   .side-ico { @apply h-[18px] w-[18px] flex-none; }
 
-  .side-social {
-    @apply grid h-8 w-8 place-items-center rounded-full bg-alt text-muted
-           transition duration-200 hover:-translate-y-0.5 hover:bg-accent hover:text-night;
+  /* ---------- Theme toggle switch (sun / track / moon) ---------- */
+  .theme-switch { @apply inline-flex cursor-pointer items-center bg-transparent focus:outline-none; }
+  .theme-switch__ico { @apply h-6 w-6 flex-none; }
+  .theme-switch__ico--sun { @apply text-gray-500; }
+  .theme-switch__ico--moon { @apply text-gray-500; }        /* darker in light mode */
+  .dark .theme-switch__ico--sun { @apply text-gray-400; }
+  .dark .theme-switch__ico--moon { @apply text-gray-200; }  /* lighter in dark mode */
+  .theme-switch__track {
+    @apply mx-3 flex h-7 w-14 items-center rounded-full bg-gray-300 px-1
+           transition-colors duration-300;
   }
+  .dark .theme-switch__track { @apply bg-accent; }
+  .theme-switch__thumb {
+    @apply h-5 w-5 rounded-full bg-white shadow-md transition-transform duration-300 ease-smooth;
+  }
+  .dark .theme-switch__thumb { @apply translate-x-7 bg-night; }
+  .theme-switch:focus-visible .theme-switch__track { @apply ring-2 ring-accent ring-offset-2; }
 
   /* ---------- Drawer backdrop ---------- */
   .sidebar-backdrop {
