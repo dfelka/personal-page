@@ -231,44 +231,37 @@
   .filter.active { @apply bg-accent text-white border-accent; }
 
   /* ---------- Project cards ---------- */
+  /* Bordered container (outline like the filter buttons) holding the image
+     on top and the action buttons underneath. */
   .card {
-    @apply relative overflow-hidden rounded-[14px] shadow-soft bg-alt aspect-[4/3]
-           transition-transform duration-300 ease-smooth;
+    @apply relative flex flex-col overflow-hidden rounded-[14px] border border-line
+           bg-surface shadow-soft transition-transform duration-300 ease-smooth;
   }
   .card:hover { @apply -translate-y-1.5; }
   .card.hide { @apply hidden; }
 
-  .card-inner { @apply relative h-full w-full; }
+  /* Image sits on top, keeps the 4:3 ratio and the hover zoom */
+  .card-media { @apply relative aspect-[4/3] overflow-hidden; }
   .card-img { @apply h-full w-full object-cover transition-transform duration-500 ease-smooth; }
   .card:hover .card-img { @apply scale-[1.08]; }
   /* No hover on touch, so drop the zoom on mobile */
   @media (max-width: 767px) {
     .card:hover .card-img { transform: none; }
-    /* Move the title to the top-right so it clears the bottom action buttons */
-    .card-title {
-      top: 0.875rem;
-      right: 0.875rem;
-      left: auto;
-      bottom: auto;
-    }
   }
 
-  /* Always-visible title chip, same translucent styling and height as the buttons */
-  .card-title {
-    @apply absolute bottom-3.5 left-3.5 z-20 inline-flex h-12 items-center rounded-full
-           px-5 text-sm font-semibold text-white backdrop-blur-sm;
-    background-color: rgb(0 0 0 / .45);
-  }
-
-  /* Action buttons — always visible, bottom-right. */
-  .card-actions { @apply absolute bottom-3.5 right-3.5 z-20 flex gap-2.5; }
+  /* Footer row under the image: title (left) + action buttons (right).
+     min-height matches a card with buttons (h-10 + p-3.5) so cards without
+     any repo/live links keep the same footer height and vertical centering. */
+  .card-actions { @apply mt-auto flex min-h-[70px] items-center justify-between gap-3 p-3.5; }
+  /* Plain title text, left-aligned (no longer a chip/button) */
+  .card-title { @apply text-sm font-semibold text-ink; }
+  /* Icon-only buttons, grouped at the right edge */
+  .card-btns { @apply flex flex-none gap-2.5; }
   .card-btn {
-    @apply grid h-12 w-12 place-items-center rounded-full text-white
-           backdrop-blur-sm transition duration-200
-           hover:-translate-y-0.5 hover:bg-accent hover:text-white;
-    background-color: rgb(0 0 0 / .45);
+    @apply grid h-10 w-10 place-items-center rounded-xl border border-line bg-alt
+           text-ink transition-colors hover:border-accent hover:text-accent;
   }
-  .card-btn svg { @apply h-[22px] w-[22px]; }
+  .card-btn svg { @apply h-[18px] w-[18px]; }
 
   /* ---------- Back to top ---------- */
   .to-top {

@@ -8,7 +8,8 @@
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
   /* ---------- Footer year ---------- */
-  $("#year").textContent = new Date().getFullYear();
+  const yearEl = $("#year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ---------- Dark mode toggle ---------- */
   // Initial theme is applied by an inline <head> script (no flash).
@@ -140,11 +141,13 @@
 
   /* ---------- Back-to-top ---------- */
   const toTop = $("#toTop");
-  const onScroll = () => {
-    toTop.classList.toggle("show", window.scrollY > 500);
-  };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  if (toTop) {
+    const onScroll = () => {
+      toTop.classList.toggle("show", window.scrollY > 500);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
 
   /* ---------- Sidebar drawer (tablet / mobile) ---------- */
   const sidebarToggle = $("#sidebarToggle");
@@ -233,46 +236,55 @@
 
   // Only render a button when its link is a real URL (not a "#" placeholder).
   const isReal = (href) => href && href !== "#";
-  const actionBtn = (href, label, ico) =>
+  const actionBtn = (href, aria, ico) =>
     isReal(href)
-      ? `<a href="${href}" target="_blank" rel="noopener" class="card-btn" aria-label="${label}">${ico}</a>`
+      ? `<a href="${href}" target="_blank" rel="noopener" class="card-btn" aria-label="${aria}">${ico}</a>`
       : "";
 
-  // Filter buttons (first one starts active)
+  // Render filters + cards only when both mount points exist.
   const filters = $("#filters");
-  filters.innerHTML = projectFilters
-    .map(
-      (f, i) =>
-        `<button class="filter${i === 0 ? " active" : ""}" data-filter="${f.id}">${f.label}</button>`
-    )
-    .join("");
-
-  // Project cards
   const grid = $("#projectsGrid");
-  grid.innerHTML = projects
-    .map(
-      (p) => `
-      <article class="card" data-cat="${p.cat}">
-        <div class="card-inner">
-          <img class="card-img" src="${p.image}" alt="${p.title}" loading="lazy" />
-          <span class="card-title">${p.title}</span>
-          <div class="card-actions">
-            ${actionBtn(p.repo, p.title + " — GitHub repository", icoGithub)}
-            ${actionBtn(p.url, p.title + " — live website", icoLink)}
-          </div>
-        </div>
-      </article>`
-    )
-    .join("");
+  if (filters && grid) {
+    // Filter buttons (first one starts active). Each label shows how many
+    // projects it matches, e.g. "All - 6", "Web - 2".
+    const countFor = (id) =>
+      id === "all" ? projects.length : projects.filter((p) => p.cat === id).length;
+    filters.innerHTML = projectFilters
+      .map(
+        (f, i) =>
+          `<button class="filter${i === 0 ? " active" : ""}" data-filter="${f.id}">${f.label} - ${countFor(f.id)}</button>`
+      )
+      .join("");
 
-  filters.addEventListener("click", (e) => {
-    const btn = e.target.closest(".filter");
-    if (!btn) return;
-    $$(".filter", filters).forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-    const f = btn.dataset.filter;
-    $$(".card", grid).forEach((card) => {
-      card.classList.toggle("hide", f !== "all" && card.dataset.cat !== f);
+    // Project cards
+    grid.innerHTML = projects
+      .map((p) => {
+        const actions = [
+          actionBtn(p.repo, p.title + " — GitHub repository", icoGithub),
+          actionBtn(p.url, p.title + " — live website", icoLink),
+        ].join("");
+        return `
+        <article class="card" data-cat="${p.cat}">
+          <div class="card-media">
+            <img class="card-img" src="${p.image}" alt="${p.title}" loading="lazy" />
+          </div>
+          <div class="card-actions">
+            <span class="card-title">${p.title}</span>
+            ${actions ? `<div class="card-btns">${actions}</div>` : ""}
+          </div>
+        </article>`;
+      })
+      .join("");
+
+    filters.addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter");
+      if (!btn) return;
+      $$(".filter", filters).forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const f = btn.dataset.filter;
+      $$(".card", grid).forEach((card) => {
+        card.classList.toggle("hide", f !== "all" && card.dataset.cat !== f);
+      });
     });
-  });
+  }
 })();
