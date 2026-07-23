@@ -211,7 +211,7 @@
   .card:hover { @apply -translate-y-1.5; }
   .card.hide { @apply hidden; }
   .card-overlay {
-    @apply absolute inset-0 flex flex-col justify-end p-[22px] pr-[92px] opacity-0 translate-y-3
+    @apply absolute inset-0 flex flex-col justify-end p-[22px] pr-[120px] opacity-0 translate-y-3
            transition duration-300;
     background: linear-gradient(to top, rgba(20, 22, 30, .88), transparent 70%);
   }
@@ -219,12 +219,13 @@
 
   /* Action buttons — always visible, fixed at the bottom-right so they
      don't shift or fade when the card is hovered. */
-  .card-actions { @apply absolute bottom-3 right-3 z-20 flex gap-2; }
+  .card-actions { @apply absolute bottom-3.5 right-3.5 z-20 flex gap-2.5; }
   .card-btn {
-    @apply grid h-9 w-9 place-items-center rounded-full text-white
+    @apply grid h-12 w-12 place-items-center rounded-full text-white
            bg-black/45 backdrop-blur-sm transition duration-200
            hover:-translate-y-0.5 hover:bg-accent hover:text-night;
   }
+  .card-btn svg { @apply h-[22px] w-[22px]; }
 
   /* ---------- Back to top ---------- */
   .to-top {
