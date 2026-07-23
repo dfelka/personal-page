@@ -75,17 +75,13 @@
   <!-- ===== Hero ===== -->
   <section id="hero" class="relative flex min-h-screen items-center overflow-hidden text-center xl:pl-[248px]">
     <div class="relative z-[2] mx-auto max-w-[780px] px-5">
-      <p class="mb-2.5 text-[.85rem] font-semibold uppercase tracking-[2px] text-accent">Hi there, I'm</p>
-      <h1 class="mb-2 text-ink tracking-tight" style="font-size:clamp(2.6rem,7vw,4.6rem)">Alex Rivera</h1>
-      <p class="mx-0 mb-8 min-h-[1.6em] text-body" style="font-size:clamp(1.1rem,3vw,1.6rem)">
-        I'm <span class="typed" data-typed='["a Product Designer.","a Front-End Developer.","a Creative Thinker.","a Problem Solver."]'></span>
-      </p>
+      <p class="mb-3 font-semibold uppercase tracking-[2px] text-accent" style="font-size:clamp(1.2rem,3vw,1.7rem); text-shadow:1px 1px 0 rgba(0,0,0,.55)">Hi there, I'm</p>
+      <h1 class="mb-8 text-ink tracking-tight" style="font-size:clamp(2.6rem,7vw,4.6rem)">Alex Rivera</h1>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="#projects" class="btn btn-primary">View My Work</a>
-        <a href="https://github.com/dfelka" target="_blank" rel="noopener" class="btn btn-ghost">Get In Touch</a>
       </div>
     </div>
-    <a href="#about" class="absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 animate-bounce2 text-2xl text-muted" aria-label="Scroll down">↓</a>
+    <a href="#about" id="scrollDown" class="absolute bottom-6 left-1/2 z-[2] grid h-11 w-11 -translate-x-1/2 place-items-center rounded-xl bg-accent text-xl text-night shadow-soft transition duration-300 hover:bg-accent-dark" aria-label="Scroll down">↓</a>
   </section>
 
   <main>
@@ -94,49 +90,16 @@
       <div class="mx-auto w-full max-w-site px-5">
         <div class="reveal mx-auto mb-[60px] max-w-[620px] text-center">
           <h2 class="head-underline" style="font-size:clamp(2rem,5vw,2.6rem)">About Me</h2>
-          <p class="mt-3 text-muted">A short introduction to who I am and what I do.</p>
+          <!-- <p class="mt-3 text-muted">A short introduction to who I am and what I do.</p> -->
         </div>
 
-        <div class="grid items-center gap-[50px] md:grid-cols-[320px_1fr]">
-          <div class="reveal mx-auto max-w-[260px] md:max-w-none">
-            <div class="grid aspect-square place-items-center rounded-[14px] text-[4rem] font-extrabold tracking-[2px] text-white shadow-soft"
-              style="background:linear-gradient(135deg,#e3d09c,#b23a6b)" aria-hidden="true">AR</div>
-          </div>
-          <div class="reveal text-center md:text-left">
-            <h3 class="text-[1.5rem]">Product Designer &amp; Front-End Developer</h3>
-            <p class="text-muted">
-              I craft clean, accessible digital experiences that people love to use. With
-              8+ years across design and code, I bridge the gap between beautiful
-              interfaces and solid engineering.
-            </p>
-            <ul class="my-6 grid gap-x-6 gap-y-2.5 text-left sm:grid-cols-2">
-              <li class="relative pl-5 text-[.95rem] before:absolute before:left-0 before:font-bold before:text-accent before:content-['›']"><strong class="text-ink">Location:</strong> Lisbon, Portugal</li>
-              <li class="relative pl-5 text-[.95rem] before:absolute before:left-0 before:font-bold before:text-accent before:content-['›']"><strong class="text-ink">Email:</strong> hello@alexrivera.dev</li>
-              <li class="relative pl-5 text-[.95rem] before:absolute before:left-0 before:font-bold before:text-accent before:content-['›']"><strong class="text-ink">Freelance:</strong> Available</li>
-              <li class="relative pl-5 text-[.95rem] before:absolute before:left-0 before:font-bold before:text-accent before:content-['›']"><strong class="text-ink">Experience:</strong> 8+ Years</li>
-            </ul>
-            <a href="#" class="btn btn-primary">Download CV</a>
-          </div>
-        </div>
-
-        <!-- Stats -->
-        <div class="mt-[70px] grid grid-cols-2 gap-6 lg:grid-cols-4">
-          <div class="reveal rounded-[14px] border border-line bg-alt p-[30px] text-center">
-            <span class="stat-num block text-[2.6rem] font-extrabold leading-none text-ink" data-count="142">0</span>
-            <span class="mt-2 block text-[.9rem] text-muted">Projects Done</span>
-          </div>
-          <div class="reveal rounded-[14px] border border-line bg-alt p-[30px] text-center">
-            <span class="stat-num block text-[2.6rem] font-extrabold leading-none text-ink" data-count="87">0</span>
-            <span class="mt-2 block text-[.9rem] text-muted">Happy Clients</span>
-          </div>
-          <div class="reveal rounded-[14px] border border-line bg-alt p-[30px] text-center">
-            <span class="stat-num block text-[2.6rem] font-extrabold leading-none text-ink" data-count="24">0</span>
-            <span class="mt-2 block text-[.9rem] text-muted">Awards Won</span>
-          </div>
-          <div class="reveal rounded-[14px] border border-line bg-alt p-[30px] text-center">
-            <span class="stat-num block text-[2.6rem] font-extrabold leading-none text-ink" data-count="9800" data-suffix="+">0</span>
-            <span class="mt-2 block text-[.9rem] text-muted">Cups of Coffee</span>
-          </div>
+        <div class="reveal mx-auto max-w-[720px] rounded-[14px] border border-line bg-alt p-8 text-center shadow-soft sm:p-10">
+          <h3 class="text-[1.0rem]">Product Designer &amp; Front-End Developer</h3>
+          <p class="mb-0 mt-3 text-muted dark:text-body">
+            I craft clean, accessible digital experiences that people love to use. With
+            8+ years across design and code, I bridge the gap between beautiful
+            interfaces and solid engineering.
+          </p>
         </div>
       </div>
     </section>
@@ -146,7 +109,7 @@
       <div class="mx-auto w-full max-w-site px-5">
         <div class="reveal mx-auto mb-[60px] max-w-[620px] text-center">
           <h2 class="head-underline" style="font-size:clamp(2rem,5vw,2.6rem)">Projects</h2>
-          <p class="mt-3 text-muted">A selection of recent work across product, brand, and web.</p>
+          <p class="mt-3 text-muted dark:text-body">A selection of recent work across product, brand, and web.</p>
         </div>
 
         <!-- Filter buttons are generated from PROJECT_FILTERS in projects.js -->
@@ -161,10 +124,9 @@
   </main>
 
   <!-- ===== Footer ===== -->
-  <footer class="border-t border-line/60 py-[30px] text-muted xl:pl-[248px]">
-    <div class="mx-auto flex w-full max-w-site flex-wrap items-center justify-between gap-2 px-5 text-center sm:text-left">
+  <footer class="border-t border-line/60 py-[30px] text-muted">
+    <div class="mx-auto w-full max-w-site px-5 text-center">
       <p class="m-0 text-[.9rem]">&copy; <span id="year"></span> Alex Rivera. All rights reserved.</p>
-      <p class="m-0 text-[.9rem] opacity-70">Built with Tailwind CSS &amp; vanilla JavaScript.</p>
     </div>
   </footer>
 

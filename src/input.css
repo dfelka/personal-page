@@ -95,7 +95,7 @@
 
   /* ---------- Buttons ---------- */
   .btn {
-    @apply inline-block rounded-full px-[30px] py-[13px] font-semibold text-[.95rem]
+    @apply inline-block rounded-xl px-[30px] py-[13px] font-semibold text-[.95rem]
            border-2 border-transparent transition duration-200 ease-smooth;
   }
   .btn:hover { @apply -translate-y-[3px]; }
@@ -173,7 +173,7 @@
 
   /* ---------- Filters ---------- */
   .filter {
-    @apply px-[22px] py-[9px] rounded-full font-semibold text-[.9rem] text-muted
+    @apply px-[22px] py-[9px] rounded-xl font-semibold text-[.9rem] text-muted
            bg-alt border border-line transition-colors;
   }
   .filter:hover { @apply text-ink; }
@@ -202,13 +202,10 @@
            hover:-translate-y-0.5 hover:bg-accent hover:text-night;
   }
 
-  /* ---------- Typed cursor ---------- */
-  .typed { @apply font-semibold text-ink pr-[3px] border-r-2 border-accent; }
-
   /* ---------- Back to top ---------- */
   .to-top {
     @apply fixed right-6 bottom-6 z-40 grid place-items-center w-[46px] h-[46px]
-           rounded-full text-night bg-accent shadow-soft invisible opacity-0 translate-y-3
+           rounded-xl text-night bg-accent shadow-soft invisible opacity-0 translate-y-3
            transition duration-300 hover:bg-accent-dark;
   }
   .to-top.show { @apply visible opacity-100 translate-y-0; }

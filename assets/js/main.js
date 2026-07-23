@@ -72,6 +72,7 @@
       if (window.matchMedia("(max-width: 1279px)").matches) closeSidebar();
     })
   );
+  const scrollDown = $("#scrollDown");
   const spy = new IntersectionObserver(
     (entries) => {
       entries.forEach((e) => {
@@ -80,6 +81,11 @@
         navLinks.forEach((l) =>
           l.classList.toggle("active", l.getAttribute("href") === "#" + id)
         );
+        // Hide the scroll-down arrow whenever Home isn't the active section.
+        if (scrollDown) {
+          scrollDown.classList.toggle("opacity-0", id !== "hero");
+          scrollDown.classList.toggle("pointer-events-none", id !== "hero");
+        }
       });
     },
     { rootMargin: "-45% 0px -50% 0px" }
@@ -99,58 +105,6 @@
     { threshold: 0.15 }
   );
   $$(".reveal").forEach((el) => revealer.observe(el));
-
-  /* ---------- Animated counters ---------- */
-  const countObs = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        const el = e.target;
-        const target = +el.dataset.count;
-        const suffix = el.dataset.suffix || "";
-        const dur = 1600;
-        const start = performance.now();
-        const tick = (now) => {
-          const p = Math.min((now - start) / dur, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.floor(eased * target).toLocaleString() + (p === 1 ? suffix : "");
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-        obs.unobserve(el);
-      });
-    },
-    { threshold: 0.6 }
-  );
-  $$(".stat-num").forEach((el) => countObs.observe(el));
-
-  /* ---------- Typed text effect ---------- */
-  const typedEl = $(".typed");
-  if (typedEl) {
-    const words = JSON.parse(typedEl.dataset.typed);
-    let wi = 0, ci = 0, deleting = false;
-    const type = () => {
-      const word = words[wi];
-      typedEl.textContent = word.slice(0, ci);
-      if (!deleting && ci < word.length) {
-        ci++;
-        setTimeout(type, 90);
-      } else if (deleting && ci > 0) {
-        ci--;
-        setTimeout(type, 45);
-      } else {
-        if (!deleting) {
-          deleting = true;
-          setTimeout(type, 1400);
-        } else {
-          deleting = false;
-          wi = (wi + 1) % words.length;
-          setTimeout(type, 250);
-        }
-      }
-    };
-    type();
-  }
 
   /* ---------- Projects: render from assets/js/projects.js ---------- */
   const projects = window.PROJECTS || [];
