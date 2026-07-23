@@ -103,15 +103,17 @@
   .side-link.active:hover { @apply bg-accent text-night font-semibold; }
   /* Brighten inactive items in dark mode for readability */
   .dark .side-link:not(.active) { @apply text-body; }
+  /* ...and go full white on hover so it's clearly noticeable */
+  .dark .side-link:not(.active):hover { @apply bg-alt text-white; }
   .side-ico { @apply h-[18px] w-[18px] flex-none; }
 
   /* ---------- Theme toggle switch (sun / track / moon) ---------- */
   .theme-switch { @apply inline-flex cursor-pointer items-center bg-transparent focus:outline-none; }
   .theme-switch__ico { @apply h-6 w-6 flex-none; }
-  .theme-switch__ico--sun { @apply text-gray-500; }
-  .theme-switch__ico--moon { @apply text-gray-500; }        /* darker in light mode */
+  .theme-switch__ico--sun { @apply text-black; }           /* black = prominent in light mode */
+  .theme-switch__ico--moon { @apply text-gray-300; }       /* faint in light mode */
   .dark .theme-switch__ico--sun { @apply text-gray-400; }
-  .dark .theme-switch__ico--moon { @apply text-gray-200; }  /* lighter in dark mode */
+  .dark .theme-switch__ico--moon { @apply text-gray-200; } /* lighter in dark mode */
   .theme-switch__track {
     @apply mx-3 flex h-7 w-14 items-center rounded-full bg-gray-300 px-1
            transition-colors duration-300;
@@ -151,7 +153,7 @@
 
   /* ---------- Project cards ---------- */
   .card {
-    @apply relative overflow-hidden rounded-[14px] shadow-soft
+    @apply relative overflow-hidden rounded-[14px] shadow-soft bg-alt
            aspect-[4/3] transition-transform duration-300 ease-smooth;
   }
   .card:hover { @apply -translate-y-1.5; }

@@ -146,12 +146,8 @@
           <p class="mt-3 text-muted">A selection of recent work across product, brand, and web.</p>
         </div>
 
-        <div class="reveal mb-10 flex flex-wrap justify-center gap-2.5" id="filters">
-          <button class="filter active" data-filter="all">All</button>
-          <button class="filter" data-filter="web">Web</button>
-          <button class="filter" data-filter="app">App</button>
-          <button class="filter" data-filter="brand">Brand</button>
-        </div>
+        <!-- Filter buttons are generated from PROJECT_FILTERS in projects.js -->
+        <div class="reveal mb-10 flex flex-wrap justify-center gap-2.5" id="filters"></div>
 
         <div class="grid gap-[26px] sm:grid-cols-2 lg:grid-cols-3" id="projectsGrid">
           <!-- items injected by JS -->
@@ -171,6 +167,7 @@
 
   <a href="#hero" class="to-top text-xl" id="toTop" aria-label="Back to top">↑</a>
 
+  <script src="assets/js/projects.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
