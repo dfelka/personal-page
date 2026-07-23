@@ -1,0 +1,13 @@
+{
+  "name": "snapfolio-portfolio",
+  "version": "1.0.0",
+  "description": "SnapFolio-style personal portfolio built with Tailwind CSS.",
+  "private": true,
+  "scripts": {
+    "dev": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

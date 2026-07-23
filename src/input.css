@@ -1,0 +1,201 @@
+/* ---------- Self-hosted fonts (offline-safe, no CDN) ---------- */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;           /* variable font: covers all weights */
+  font-display: swap;
+  src: url("../fonts/inter-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/poppins-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/poppins-700.woff2") format("woff2");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Component + stateful styles that JS toggles or that are
+   awkward as pure utility classes. Compiled to assets/css/style.css
+   ============================================================ */
+
+@layer base {
+  /* Theme tokens — channels as "R G B" so Tailwind's <alpha-value> works. */
+  :root {
+    --c-page: 255 255 255;
+    --c-surface: 255 255 255;
+    --c-alt: 247 248 250;
+    --c-ink: 22 23 27;
+    --c-body: 65 66 71;
+    --c-muted: 108 109 115;
+    --c-line: 231 232 236;
+  }
+  .dark {
+    --c-page: 22 23 27;
+    --c-surface: 31 32 39;
+    --c-alt: 25 26 32;
+    --c-ink: 243 244 246;
+    --c-body: 195 196 201;
+    --c-muted: 139 140 147;
+    --c-line: 44 45 53;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 24px;
+  }
+  body {
+    @apply bg-page font-sans text-body antialiased;
+    line-height: 1.65;
+    transition: background-color .3s, color .3s;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-ink font-bold leading-tight;
+  }
+}
+
+@layer components {
+  /* ---------- Buttons ---------- */
+  .btn {
+    @apply inline-block rounded-full px-[30px] py-[13px] font-semibold text-[.95rem]
+           border-2 border-transparent transition duration-200 ease-smooth;
+  }
+  .btn:hover { @apply -translate-y-[3px]; }
+  .btn-primary { @apply bg-accent text-night shadow-[0_12px_24px_-12px_theme(colors.accent.DEFAULT)]; }
+  .btn-primary:hover { @apply bg-accent-dark; }
+  .btn-ghost { @apply text-white border-white/60; }
+  .btn-ghost:hover { @apply bg-white text-night border-white; }
+  .btn-full { @apply w-full text-center; }
+
+  /* ---------- Section heading underline ---------- */
+  .head-underline { @apply relative inline-block pb-4; }
+  .head-underline::after {
+    content: "";
+    @apply absolute left-1/2 bottom-0 -translate-x-1/2 w-[60px] h-[3px] bg-accent rounded;
+  }
+
+  /* ---------- Floating sidebar ---------- */
+  .sidebar {
+    @apply fixed left-4 z-50 flex w-[212px] flex-col rounded-2xl border border-line
+           bg-surface p-4 shadow-soft;
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+
+  .side-link {
+    @apply flex items-center gap-3 rounded-xl px-3 py-2.5 text-[.92rem] font-medium
+           text-muted transition-colors duration-200 hover:bg-alt hover:text-ink;
+  }
+  .side-link.active { @apply bg-alt text-ink font-semibold; }
+  .side-ico { @apply h-[18px] w-[18px] flex-none; }
+
+  .side-social {
+    @apply grid h-8 w-8 place-items-center rounded-full bg-alt text-muted
+           transition duration-200 hover:-translate-y-0.5 hover:bg-accent hover:text-night;
+  }
+
+  /* ---------- Drawer backdrop ---------- */
+  .sidebar-backdrop {
+    @apply fixed inset-0 z-40 bg-black/50 opacity-0 transition-opacity duration-300;
+  }
+
+  /* Below xl the sidebar becomes a slide-in drawer */
+  @media (max-width: 1279px) {
+    .sidebar {
+      transform: translate(calc(-100% - 1.5rem), -50%);
+      transition: transform .35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.sidebar-open .sidebar { transform: translate(0, -50%); }
+    body.sidebar-open { overflow: hidden; }
+  }
+  @media (min-width: 1280px) {
+    .sidebar-backdrop, #sidebarToggle { display: none; }
+  }
+
+  /* ---------- Timeline ---------- */
+  .timeline { @apply relative pl-7; }
+  .timeline::before {
+    content: "";
+    @apply absolute left-[5px] top-1.5 bottom-1.5 w-0.5 bg-line;
+  }
+  .timeline-item { @apply relative pb-7 last:pb-0; }
+  .timeline-item::before {
+    content: "";
+    @apply absolute -left-7 top-1.5 w-3 h-3 rounded-full bg-surface border-[3px] border-accent;
+  }
+
+  /* ---------- Skill bars ---------- */
+  .skill-fill {
+    @apply h-full w-0 rounded-full;
+    background: linear-gradient(90deg, theme(colors.accent.DEFAULT), theme(colors.accent.dark));
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ---------- Filters ---------- */
+  .filter {
+    @apply px-[22px] py-[9px] rounded-full font-semibold text-[.9rem] text-muted
+           bg-alt border border-line transition-colors;
+  }
+  .filter:hover { @apply text-ink; }
+  .filter.active { @apply bg-accent text-night border-accent; }
+
+  /* ---------- Portfolio cards ---------- */
+  .card {
+    @apply relative overflow-hidden rounded-[14px] shadow-soft cursor-pointer
+           aspect-[4/3] transition-transform duration-300 ease-smooth;
+  }
+  .card:hover { @apply -translate-y-1.5; }
+  .card.hide { @apply hidden; }
+  .card-overlay {
+    @apply absolute inset-0 flex flex-col justify-end p-[22px] opacity-0 translate-y-3
+           transition duration-300;
+    background: linear-gradient(to top, rgba(20, 22, 30, .88), transparent 70%);
+  }
+  .card:hover .card-overlay { @apply opacity-100 translate-y-0; }
+
+  /* ---------- Typed cursor ---------- */
+  .typed { @apply font-semibold text-white pr-[3px] border-r-2 border-accent; }
+
+  /* ---------- Form validation ---------- */
+  .field-input {
+    @apply w-full rounded-[10px] border border-line bg-alt px-4 py-3.5 text-body
+           transition-colors resize-y focus:outline-none focus:border-accent focus:bg-surface;
+  }
+  .field-input::placeholder { @apply text-muted; }
+  .field-input.invalid { @apply border-red-500; }
+  .form-status.ok { @apply text-emerald-600; }
+  .form-status.err { @apply text-red-500; }
+
+  /* ---------- Back to top ---------- */
+  .to-top {
+    @apply fixed right-6 bottom-6 z-40 grid place-items-center w-[46px] h-[46px]
+           rounded-full text-night bg-accent shadow-soft invisible opacity-0 translate-y-3
+           transition duration-300 hover:bg-accent-dark;
+  }
+  .to-top.show { @apply visible opacity-100 translate-y-0; }
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal {
+    @apply opacity-0 translate-y-7;
+    transition: opacity .7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform .7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.in { @apply opacity-100 translate-y-0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+}

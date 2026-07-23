@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal portfolio of Alex Rivera — Product Designer & Front-End Developer." />
+  <title>Alex Rivera — Portfolio</title>
+
+  <!-- Set theme before paint to avoid a flash of the wrong theme -->
+  <script>
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark");
+      }
+    })();
+  </script>
+
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-700.woff2" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👋</text></svg>" />
+</head>
+<body>
+
+  <!-- ===== Floating open button (tablet / mobile) ===== -->
+  <button id="sidebarToggle" class="fixed left-4 top-4 z-[60] grid h-11 w-11 place-items-center rounded-xl border border-line bg-surface text-ink shadow-soft transition hover:bg-alt xl:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">
+    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+
+  <!-- ===== Backdrop (drawer mode) ===== -->
+  <div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
+
+  <!-- ===== Floating sidebar ===== -->
+  <aside id="sidebar" class="sidebar">
+    <div class="mb-5 flex items-center justify-between px-2">
+      <a href="#hero" class="brand text-[1.25rem] font-extrabold tracking-tight text-ink">Alex<span class="text-accent">Rivera</span></a>
+      <button id="themeToggle" class="grid h-9 w-9 place-items-center rounded-full text-base transition hover:bg-alt" aria-label="Toggle dark mode">
+        <span class="dark:hidden">🌙</span>
+        <span class="hidden dark:inline">☀️</span>
+      </button>
+    </div>
+
+    <nav id="nav">
+      <ul class="space-y-1">
+        <li><a href="#hero" class="side-link active">
+          <svg class="side-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h5v-6h4v6h5V9.5"/></svg>
+          <span>Home</span></a></li>
+        <li><a href="#about" class="side-link">
+          <svg class="side-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+          <span>About</span></a></li>
+        <li><a href="#resume" class="side-link">
+          <svg class="side-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6v20h12V6z"/><path d="M14 2v4h4"/><path d="M9 12h6M9 16h6"/></svg>
+          <span>Resume</span></a></li>
+        <li><a href="#portfolio" class="side-link">
+          <svg class="side-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-4 4 3 3-2 4 3"/></svg>
+          <span>Portfolio</span></a></li>
+        <li><a href="#services" class="side-link">
+          <svg class="side-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>
+          <span>Services</span></a></li>
+        <li><a href="#contact" class="side-link">
+          <svg class="side-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+          <span>Contact</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="mt-5 flex items-center gap-2 border-t border-line pt-4">
+      <a href="#" class="side-social" aria-label="X / Twitter"><svg viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="#" class="side-social" aria-label="Dribbble"><svg viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm9.885 11.441c-2.575-.422-4.943-.445-7.103-.073a42.15 42.15 0 0 0-.767-1.68c2.31-1 4.165-2.358 5.548-4.082a9.86 9.86 0 0 1 2.322 5.835zm-3.842-7.282c-1.205 1.554-2.868 2.783-4.986 3.68a46.29 46.29 0 0 0-3.488-5.438A9.89 9.89 0 0 1 12 2.087c2.275 0 4.368.779 6.043 2.072zM7.527 3.166a44.6 44.6 0 0 1 3.537 5.381c-2.43.715-5.331 1.082-8.684 1.105a9.93 9.93 0 0 1 5.147-6.486zM2.087 12l.013-.256c3.849-.005 7.169-.448 9.95-1.322.233.439.456.884.673 1.331-3.264 1.045-5.86 3.071-7.678 6.028A9.91 9.91 0 0 1 2.087 12zm3.744 7.146c1.578-2.759 3.944-4.6 7.042-5.512.885 2.34 1.607 4.774 2.169 7.03a9.9 9.9 0 0 1-9.211-1.518zm11.144.437c-.518-2.03-1.183-4.221-1.983-6.42 1.877-.293 3.926-.163 6.114.42a9.9 9.9 0 0 1-4.131 6z"/></svg></a>
+      <a href="#" class="side-social" aria-label="GitHub"><svg viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .321.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+      <a href="#" class="side-social" aria-label="LinkedIn"><svg viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+    </div>
+  </aside>
+
+  <!-- ===== Hero ===== -->
+  <section id="hero" class="relative flex min-h-screen items-center overflow-hidden text-center text-white xl:pl-[248px]"
+    style="background: radial-gradient(1200px 600px at 70% -10%, rgba(227,208,156,.28), transparent 60%), linear-gradient(135deg,#1b1d29 0%,#2a2140 45%,#3a2233 100%);">
+    <div class="pointer-events-none absolute inset-0 opacity-60"
+      style="background: radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.35), transparent), radial-gradient(2px 2px at 80% 60%, rgba(255,255,255,.25), transparent), radial-gradient(1.5px 1.5px at 50% 80%, rgba(255,255,255,.3), transparent), radial-gradient(2px 2px at 65% 25%, rgba(255,255,255,.2), transparent);"></div>
+
+    <div class="relative z-[2] mx-auto max-w-[780px] px-5">
+      <p class="mb-2.5 text-[.85rem] font-semibold uppercase tracking-[2px] text-accent">Hi there, I'm</p>
+      <h1 class="mb-2 text-white tracking-tight" style="font-size:clamp(2.6rem,7vw,4.6rem)">Alex Rivera</h1>
+      <p class="mx-0 mb-8 min-h-[1.6em] text-white/85" style="font-size:clamp(1.1rem,3vw,1.6rem)">
+        I'm <span class="typed" data-typed='["a Product Designer.","a Front-End Developer.","a Creative Thinker.","a Problem Solver."]'></span>
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#portfolio" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+      </div>
+    </div>
+    <a href="#about" class="absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 animate-bounce2 text-2xl text-white" aria-label="Scroll down">↓</a>
+  </section>
+
+  <main>
+    <!-- ===== About ===== -->
+    <section id="about" class="py-[100px] xl:pl-[248px]">
+      <div class="mx-auto w-full max-w-site px-5">
+        <div class="reveal mx-auto mb-[60px] max-w-[620px] text-center">
+          <h2 class="head-underline" style="font-size:clamp(2rem,5vw,2.6rem)">About Me</h2>
+          <p class="mt-3 text-muted">A short introduction to who I am and what I do.</p>
+        </div>
+
+        <div class="grid items-center gap-[50px] md:grid-cols-[320px_1fr]">
+          <div class="reveal mx-auto max-w-[260px] md:max-w-none">
+            <div class="grid aspect-square place-items-center rounded-[14px] text-[4rem] font-extrabold tracking-[2px] text-white shadow-soft"
+              style="background:linear-gradient(135deg,#e3d09c,#b23a6b)" aria-hidden="true">AR</div>
+          </div>
+          <div class="reveal text-center md:text-left">
+            <h3 class="text-[1.5rem]">Product Designer &amp; Front-End Developer</h3>
+            <p class="text-muted">
+              I craft clean, accessible digital experiences that people love to use. With
+              8+ years across design and code, I bridge the gap between beautiful
+              interfaces and solid engineering.
+            </p>
+            <ul class="my-6 grid gap-x-6 gap-y-2.5 text-left sm:grid-cols-2">
+              <li class="relative pl-5 text-[.95rem] before:absolute before:left-0 before:font-bold before:text-accent before:content-['›']"><strong class="text-ink">Location:</strong> Lisbon, Portugal</li>
+              <li class="relative pl-5 text-[.95rem] before:absolute before:left-0 before:font-bold before:text-accent before:content-['›']"><strong class="text-ink">Email:</strong> hello@alexrivera.dev</li>
+              <li class="relative pl-5 text-[.95rem] before:absolute before:left-0 before:font-bold before:text-accent before:content-['›']"><strong class="text-ink">Freelance:</strong> Available</li>
+              <li class="relative pl-5 text-[.95rem] before:absolute before:left-0 before:font-bold before:text-accent before:content-['›']"><strong class="text-ink">Experience:</strong> 8+ Years</li>
+            </ul>
+            <a href="#" class="btn btn-primary">Download CV</a>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="mt-[70px] grid grid-cols-2 gap-6 lg:grid-cols-4">
+          <div class="reveal rounded-[14px] border border-line bg-alt p-[30px] text-center">
+            <span class="stat-num block text-[2.6rem] font-extrabold leading-none text-ink" data-count="142">0</span>
+            <span class="mt-2 block text-[.9rem] text-muted">Projects Done</span>
+          </div>
+          <div class="reveal rounded-[14px] border border-line bg-alt p-[30px] text-center">
+            <span class="stat-num block text-[2.6rem] font-extrabold leading-none text-ink" data-count="87">0</span>
+            <span class="mt-2 block text-[.9rem] text-muted">Happy Clients</span>
+          </div>
+          <div class="reveal rounded-[14px] border border-line bg-alt p-[30px] text-center">
+            <span class="stat-num block text-[2.6rem] font-extrabold leading-none text-ink" data-count="24">0</span>
+            <span class="mt-2 block text-[.9rem] text-muted">Awards Won</span>
+          </div>
+          <div class="reveal rounded-[14px] border border-line bg-alt p-[30px] text-center">
+            <span class="stat-num block text-[2.6rem] font-extrabold leading-none text-ink" data-count="9800" data-suffix="+">0</span>
+            <span class="mt-2 block text-[.9rem] text-muted">Cups of Coffee</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Resume / Skills ===== -->
+    <section id="resume" class="bg-alt py-[100px] xl:pl-[248px]">
+      <div class="mx-auto w-full max-w-site px-5">
+        <div class="reveal mx-auto mb-[60px] max-w-[620px] text-center">
+          <h2 class="head-underline" style="font-size:clamp(2rem,5vw,2.6rem)">Resume</h2>
+          <p class="mt-3 text-muted">My experience, education, and the skills I bring to the table.</p>
+        </div>
+
+        <div class="grid gap-[50px] md:grid-cols-2">
+          <div class="reveal">
+            <h3 class="mb-[26px] text-[1.4rem]">Experience</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <span class="mb-2 inline-block rounded-full bg-accent/25 px-3 py-[3px] text-[.78rem] font-semibold text-ink">2021 — Present</span>
+                <h4 class="mb-0.5 text-[1.1rem]">Lead Product Designer</h4>
+                <span class="mb-2 block text-[.9rem] italic text-muted">Northwind Studio</span>
+                <p class="m-0 text-[.95rem] text-muted">Lead design across a suite of B2B products, building the design system and mentoring a team of four.</p>
+              </div>
+              <div class="timeline-item">
+                <span class="mb-2 inline-block rounded-full bg-accent/25 px-3 py-[3px] text-[.78rem] font-semibold text-ink">2018 — 2021</span>
+                <h4 class="mb-0.5 text-[1.1rem]">UI/UX Developer</h4>
+                <span class="mb-2 block text-[.9rem] italic text-muted">Pixel &amp; Co.</span>
+                <p class="m-0 text-[.95rem] text-muted">Shipped responsive web apps and design prototypes for startups across fintech and health.</p>
+              </div>
+              <div class="timeline-item">
+                <span class="mb-2 inline-block rounded-full bg-accent/25 px-3 py-[3px] text-[.78rem] font-semibold text-ink">2016 — 2018</span>
+                <h4 class="mb-0.5 text-[1.1rem]">Junior Web Developer</h4>
+                <span class="mb-2 block text-[.9rem] italic text-muted">Freelance</span>
+                <p class="m-0 text-[.95rem] text-muted">Built marketing sites and landing pages with a focus on performance and accessibility.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <h3 class="mb-[26px] text-[1.4rem]">Skills</h3>
+            <div>
+              <div class="mb-5">
+                <div class="mb-2 flex justify-between text-[.9rem] font-semibold"><span>UI/UX Design</span><span>95%</span></div>
+                <div class="h-2 overflow-hidden rounded-full bg-line"><div class="skill-fill" data-level="95"></div></div>
+              </div>
+              <div class="mb-5">
+                <div class="mb-2 flex justify-between text-[.9rem] font-semibold"><span>HTML &amp; CSS</span><span>92%</span></div>
+                <div class="h-2 overflow-hidden rounded-full bg-line"><div class="skill-fill" data-level="92"></div></div>
+              </div>
+              <div class="mb-5">
+                <div class="mb-2 flex justify-between text-[.9rem] font-semibold"><span>JavaScript</span><span>85%</span></div>
+                <div class="h-2 overflow-hidden rounded-full bg-line"><div class="skill-fill" data-level="85"></div></div>
+              </div>
+              <div class="mb-5">
+                <div class="mb-2 flex justify-between text-[.9rem] font-semibold"><span>Figma</span><span>90%</span></div>
+                <div class="h-2 overflow-hidden rounded-full bg-line"><div class="skill-fill" data-level="90"></div></div>
+              </div>
+              <div class="mb-5">
+                <div class="mb-2 flex justify-between text-[.9rem] font-semibold"><span>React</span><span>78%</span></div>
+                <div class="h-2 overflow-hidden rounded-full bg-line"><div class="skill-fill" data-level="78"></div></div>
+              </div>
+            </div>
+
+            <h3 class="mb-[26px] mt-10 text-[1.4rem]">Education</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <span class="mb-2 inline-block rounded-full bg-accent/25 px-3 py-[3px] text-[.78rem] font-semibold text-ink">2012 — 2016</span>
+                <h4 class="mb-0.5 text-[1.1rem]">BSc, Interaction Design</h4>
+                <span class="mb-2 block text-[.9rem] italic text-muted">University of the Arts</span>
+                <p class="m-0 text-[.95rem] text-muted">Graduated with honors, focusing on human-centered design and front-end engineering.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Portfolio ===== -->
+    <section id="portfolio" class="py-[100px] xl:pl-[248px]">
+      <div class="mx-auto w-full max-w-site px-5">
+        <div class="reveal mx-auto mb-[60px] max-w-[620px] text-center">
+          <h2 class="head-underline" style="font-size:clamp(2rem,5vw,2.6rem)">Portfolio</h2>
+          <p class="mt-3 text-muted">A selection of recent work across product, brand, and web.</p>
+        </div>
+
+        <div class="reveal mb-10 flex flex-wrap justify-center gap-2.5" id="filters">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="web">Web</button>
+          <button class="filter" data-filter="app">App</button>
+          <button class="filter" data-filter="brand">Brand</button>
+        </div>
+
+        <div class="grid gap-[26px] sm:grid-cols-2 lg:grid-cols-3" id="portfolioGrid">
+          <!-- items injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Services ===== -->
+    <section id="services" class="bg-alt py-[100px] xl:pl-[248px]">
+      <div class="mx-auto w-full max-w-site px-5">
+        <div class="reveal mx-auto mb-[60px] max-w-[620px] text-center">
+          <h2 class="head-underline" style="font-size:clamp(2rem,5vw,2.6rem)">Services</h2>
+          <p class="mt-3 text-muted">How I can help bring your product to life.</p>
+        </div>
+
+        <div class="grid gap-[26px] sm:grid-cols-2 lg:grid-cols-3">
+          <article class="reveal group rounded-[14px] border border-line bg-surface p-9 transition duration-300 ease-smooth hover:-translate-y-1.5 hover:border-transparent hover:shadow-soft">
+            <div class="mb-5 grid h-[60px] w-[60px] place-items-center rounded-[14px] bg-accent/25 text-[1.4rem] text-ink">✎</div>
+            <h3 class="text-[1.2rem]">Product Design</h3>
+            <p class="m-0 text-[.95rem] text-muted">End-to-end product design from research and wireframes to polished, shippable interfaces.</p>
+          </article>
+          <article class="reveal group rounded-[14px] border border-line bg-surface p-9 transition duration-300 ease-smooth hover:-translate-y-1.5 hover:border-transparent hover:shadow-soft">
+            <div class="mb-5 grid h-[60px] w-[60px] place-items-center rounded-[14px] bg-accent/25 text-[1.4rem] text-ink">&lt;/&gt;</div>
+            <h3 class="text-[1.2rem]">Front-End Development</h3>
+            <p class="m-0 text-[.95rem] text-muted">Fast, accessible, standards-based front-ends built with clean, maintainable code.</p>
+          </article>
+          <article class="reveal group rounded-[14px] border border-line bg-surface p-9 transition duration-300 ease-smooth hover:-translate-y-1.5 hover:border-transparent hover:shadow-soft">
+            <div class="mb-5 grid h-[60px] w-[60px] place-items-center rounded-[14px] bg-accent/25 text-[1.4rem] text-ink">◈</div>
+            <h3 class="text-[1.2rem]">Design Systems</h3>
+            <p class="m-0 text-[.95rem] text-muted">Scalable component libraries and design tokens that keep teams consistent and fast.</p>
+          </article>
+          <article class="reveal group rounded-[14px] border border-line bg-surface p-9 transition duration-300 ease-smooth hover:-translate-y-1.5 hover:border-transparent hover:shadow-soft">
+            <div class="mb-5 grid h-[60px] w-[60px] place-items-center rounded-[14px] bg-accent/25 text-[1.4rem] text-ink">✦</div>
+            <h3 class="text-[1.2rem]">Brand Identity</h3>
+            <p class="m-0 text-[.95rem] text-muted">Logos, type, and visual systems that give your product a memorable personality.</p>
+          </article>
+          <article class="reveal group rounded-[14px] border border-line bg-surface p-9 transition duration-300 ease-smooth hover:-translate-y-1.5 hover:border-transparent hover:shadow-soft">
+            <div class="mb-5 grid h-[60px] w-[60px] place-items-center rounded-[14px] bg-accent/25 text-[1.4rem] text-ink">📱</div>
+            <h3 class="text-[1.2rem]">Mobile Design</h3>
+            <p class="m-0 text-[.95rem] text-muted">Native-feeling mobile experiences designed for touch, speed, and delight.</p>
+          </article>
+          <article class="reveal group rounded-[14px] border border-line bg-surface p-9 transition duration-300 ease-smooth hover:-translate-y-1.5 hover:border-transparent hover:shadow-soft">
+            <div class="mb-5 grid h-[60px] w-[60px] place-items-center rounded-[14px] bg-accent/25 text-[1.4rem] text-ink">◎</div>
+            <h3 class="text-[1.2rem]">Consulting</h3>
+            <p class="m-0 text-[.95rem] text-muted">Design and front-end audits with actionable recommendations to level up your product.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="py-[100px] xl:pl-[248px]">
+      <div class="mx-auto w-full max-w-site px-5">
+        <div class="reveal mx-auto mb-[60px] max-w-[620px] text-center">
+          <h2 class="head-underline" style="font-size:clamp(2rem,5vw,2.6rem)">Get In Touch</h2>
+          <p class="mt-3 text-muted">Have a project in mind? Let's talk.</p>
+        </div>
+
+        <div class="grid gap-10 md:grid-cols-[.85fr_1.15fr]">
+          <div class="reveal flex flex-col gap-[22px]">
+            <div class="flex items-center gap-4 rounded-[14px] border border-line bg-alt p-[22px]">
+              <span class="grid h-12 w-12 flex-none place-items-center rounded-full bg-accent/25 text-[1.2rem] text-ink">📍</span>
+              <div><h4 class="mb-0.5 text-base">Location</h4><p class="m-0 text-[.92rem] text-muted">Lisbon, Portugal</p></div>
+            </div>
+            <div class="flex items-center gap-4 rounded-[14px] border border-line bg-alt p-[22px]">
+              <span class="grid h-12 w-12 flex-none place-items-center rounded-full bg-accent/25 text-[1.2rem] text-ink">✉</span>
+              <div><h4 class="mb-0.5 text-base">Email</h4><p class="m-0 text-[.92rem] text-muted">hello@alexrivera.dev</p></div>
+            </div>
+            <div class="flex items-center gap-4 rounded-[14px] border border-line bg-alt p-[22px]">
+              <span class="grid h-12 w-12 flex-none place-items-center rounded-full bg-accent/25 text-[1.2rem] text-ink">☎</span>
+              <div><h4 class="mb-0.5 text-base">Phone</h4><p class="m-0 text-[.92rem] text-muted">+351 900 000 000</p></div>
+            </div>
+          </div>
+
+          <form class="reveal grid gap-4" id="contactForm" novalidate>
+            <input type="text" name="name" id="name" placeholder="Your Name" required class="field-input" />
+            <input type="email" name="email" id="email" placeholder="Your Email" required class="field-input" />
+            <input type="text" name="subject" id="subject" placeholder="Subject" required class="field-input" />
+            <textarea name="message" id="message" rows="5" placeholder="Your Message" required class="field-input"></textarea>
+            <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+            <p class="form-status m-0 text-[.9rem] font-semibold" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="bg-night py-[30px] text-white/70 xl:pl-[248px]">
+    <div class="mx-auto flex w-full max-w-site flex-wrap items-center justify-between gap-2 px-5 text-center sm:text-left">
+      <p class="m-0 text-[.9rem]">&copy; <span id="year"></span> Alex Rivera. All rights reserved.</p>
+      <p class="m-0 text-[.9rem] text-white/45">Built with Tailwind CSS &amp; vanilla JavaScript.</p>
+    </div>
+  </footer>
+
+  <a href="#hero" class="to-top text-xl" id="toTop" aria-label="Back to top">↑</a>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
